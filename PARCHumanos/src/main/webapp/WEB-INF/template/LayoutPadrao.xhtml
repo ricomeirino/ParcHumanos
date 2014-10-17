@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><ui:insert name="titulo">ParcHumanos - Programa de Alocação de Recursos Clássico - Humanos</ui:insert></title>
+	<h:outputStylesheet library="css" name="sistema.css" />
+</h:head>
+
+<h:body>
+	<header> 
+		<h:form>
+			<table>
+				<tr>
+					<td>&nbsp;&nbsp;
+						<h:link>
+							<h:graphicImage library="images" name="logo-parcHumanos.png" />
+						</h:link>					
+					</td>
+					<td width="450"><p:outputLabel/> </td>
+					<td>
+						<p:menubar>
+							<p:menuitem value="Alocação de Recurso" style="width:150px" />
+							
+							<p:menuitem value="Cadastro de Recurso" style="width:150px"/>
+							
+							<p:menuitem value="Cadastro de Atividades" style="text-align:center;width:160px"/>
+							
+							<p:menuitem value="Relatório" style="width:100px"/>
+							
+						</p:menubar>					
+					</td>					
+				</tr>
+			</table>
+				
+		
+		</h:form> 
+	</header>
+</h:body>
+
+<div id="conteudo">
+	<ui:insert name="corpo" />
+</div>
+
+<p:separator style="margin-top: 20px" />
+
+<footer> Projeto de Software: Valéria Priscilla Monteiro -
+Ricardo J Meirino - Dayse Yanne Caldas </footer>
+
+</html>

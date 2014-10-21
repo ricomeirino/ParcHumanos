@@ -15,6 +15,7 @@ public class Recurso implements Serializable{
 	private String nome;
 	private String matricula;
 	private Ocupacao ocupacao;
+	
 	public int getIdRecurso() {
 		return idRecurso;
 	}

@@ -7,7 +7,7 @@ import util.Mensagem;
 import dao.ProjetoDAO;
 
 public class CadastroProjetoControl {
-
+   
 	public List<Projeto> listaDeProjetos() {
 		ProjetoDAO projetoDAO = new ProjetoDAO();
 		List<Projeto> projetos = projetoDAO.getProjetos();

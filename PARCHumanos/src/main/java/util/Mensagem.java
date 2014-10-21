@@ -13,7 +13,7 @@ public class Mensagem {
 		codigos.add(2); // Falha na inclusão
 		codigos.add(3); // Falha na exclusão
 		codigos.add(4); // Falha na atualização
-		codigos.add(5); // Registro não pode ser excluído
+		codigos.add(5); // Registro não pode ser excluído da base
 		
 	}
 	

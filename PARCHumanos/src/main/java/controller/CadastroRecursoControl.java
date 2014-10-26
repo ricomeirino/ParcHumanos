@@ -85,4 +85,34 @@ public class CadastroRecursoControl {
 		return mensagem;
 	}
 	
+	public Mensagem atualizarRecurso(Recurso recursoEditado, int idOcupacao) {
+		String msg = null;
+		RecursoDAO recursoDAO = new RecursoDAO();
+		
+		// testar se existe recurso com a mesma matricula
+		Recurso recursoNaBase = recursoDAO.buscaRecursoPorMatricula(recursoEditado.getMatricula()); 
+		int codigoMsg;
+		
+		// se for o mesmo recurso ou não tiver recurso com a mesma matricula -> pode alterar
+		
+		if (recursoNaBase == null || recursoNaBase.getIdRecurso() == recursoEditado.getIdRecurso()){
+			boolean retorno = recursoDAO.atualizaRecurso(recursoEditado, idOcupacao); 
+			if (retorno) {
+				codigoMsg = 0;
+				msg = "Recurso atualizado com sucesso";
+			} else {
+				codigoMsg = 4;
+				msg = "Falha na atualização do recurso. Tente novamente.";
+			}
+
+		}else{ // se não for o mesmo recurso -> não pode alterar pois a matrícula do recurso já existe
+			codigoMsg = 1;
+			msg = "Recurso com matrícula " + recursoEditado.getMatricula()
+					+ " já existe.";
+		}
+				
+		Mensagem mensagem = new Mensagem(codigoMsg, msg);
+
+		return mensagem;		
+	}
 }

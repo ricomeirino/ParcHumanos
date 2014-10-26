@@ -18,19 +18,19 @@ import controller.CadastroRecursoControl;
 
 @ManagedBean
 @ViewScoped
-public class CadastroRecursoBean implements Serializable{
+public class CadastroRecursoBean implements Serializable {
 
 	private static final long serialVersionUID = 6902351400500019365L;
 
-	private String matriculaNovo;	
+	private String matriculaNovo;
 	private String nomeNovo;
 	private int ocupacaoNovo;
 	private List<Recurso> recursos;
-	
+
 	private List<Recurso> recursosFiltrados;
-	
+
 	private List<Ocupacao> ocupacoes;
-	
+
 	public CadastroRecursoBean() {
 		CadastroRecursoControl cadastroRecursoControl = new CadastroRecursoControl();
 		this.recursos = cadastroRecursoControl.listaDeRecursos();
@@ -52,6 +52,7 @@ public class CadastroRecursoBean implements Serializable{
 	public void setNomeNovo(String nomeNovo) {
 		this.nomeNovo = nomeNovo;
 	}
+
 	public List<Recurso> getRecursos() {
 		return recursos;
 	}
@@ -59,7 +60,6 @@ public class CadastroRecursoBean implements Serializable{
 	public void setRecursos(List<Recurso> recursos) {
 		this.recursos = recursos;
 	}
-	
 
 	public List<Recurso> getRecursosFiltrados() {
 		return recursosFiltrados;
@@ -68,7 +68,7 @@ public class CadastroRecursoBean implements Serializable{
 	public void setRecursosFiltrados(List<Recurso> recursosFiltrados) {
 		this.recursosFiltrados = recursosFiltrados;
 	}
-	
+
 	public List<Ocupacao> getOcupacoes() {
 		return ocupacoes;
 	}
@@ -76,7 +76,6 @@ public class CadastroRecursoBean implements Serializable{
 	public void setOcupacoes(List<Ocupacao> ocupacoes) {
 		this.ocupacoes = ocupacoes;
 	}
-	
 
 	public int getOcupacaoNovo() {
 		return ocupacaoNovo;
@@ -87,16 +86,28 @@ public class CadastroRecursoBean implements Serializable{
 	}
 
 	public void onEdit(RowEditEvent event) {
-//		Projeto projetoEditado = (Projeto) event.getObject();
-//
-//		CadastroProjetoControl cadastroProjetoControl = new CadastroProjetoControl();
-//		
-//		Mensagem mensagem = cadastroProjetoControl.atualizaProjeto(projetoEditado);
-//		
-//		FacesMessage msg = new FacesMessage(mensagem.getMsg(),
-//				((Projeto) event.getObject()).getNome());
-//
-//		FacesContext.getCurrentInstance().addMessage(null, msg);
+		Recurso recursoEditado = (Recurso) event.getObject();
+
+		System.out.println("recursoE" + recursoEditado.getIdRecurso());
+		System.out.println("recursoE" + recursoEditado.getMatricula());
+		System.out.println("recursoE" + recursoEditado.getNome());
+		System.out.println("recursoE"
+				+ recursoEditado.getOcupacao().getIdOcupacao());
+		System.out.println("recursoE" + recursoEditado.getOcupacao().getNome());
+		System.out.println("recursoE   "
+				+ recursoEditado.getOcupacao().getIdOcupacao());
+
+		CadastroRecursoControl cadastroRecursoControl = new CadastroRecursoControl();
+		
+		Mensagem mensagem = cadastroRecursoControl.atualizarRecurso(
+				recursoEditado, recursoEditado.getOcupacao().getIdOcupacao());
+		
+		this.recursos = cadastroRecursoControl.listaDeRecursos();
+		
+		FacesMessage msg = new FacesMessage(mensagem.getMsg(),
+				((Recurso) event.getObject()).getNome());
+
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 
 	}
 
@@ -107,16 +118,15 @@ public class CadastroRecursoBean implements Serializable{
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
-
 	public void onDelete(Recurso recurso) {
 
 		CadastroRecursoControl cadastroRecursoControl = new CadastroRecursoControl();
 		Mensagem mensagem = cadastroRecursoControl.removeRecurso(recurso);
-		
-		if (mensagem.getCodigo() == 0){
+
+		if (mensagem.getCodigo() == 0) {
 			this.recursos.remove(recurso);
 		}
-		
+
 		FacesMessage msg = new FacesMessage(mensagem.getMsg(),
 				recurso.getNome());
 
@@ -129,11 +139,11 @@ public class CadastroRecursoBean implements Serializable{
 		Recurso recursoNovo = new Recurso();
 		recursoNovo.setMatricula(matriculaNovo);
 		recursoNovo.setNome(nomeNovo);
-		
 
-		Mensagem mensagem = cadastroRecursoControl.insereRecurso(recursoNovo, ocupacaoNovo);
+		Mensagem mensagem = cadastroRecursoControl.insereRecurso(recursoNovo,
+				ocupacaoNovo);
 		this.recursos = cadastroRecursoControl.listaDeRecursos();
-	
+
 		if (mensagem.getCodigo() == 0) {
 			this.matriculaNovo = "";
 			this.nomeNovo = "";
@@ -147,5 +157,4 @@ public class CadastroRecursoBean implements Serializable{
 		return null;
 	}
 
-	
 }

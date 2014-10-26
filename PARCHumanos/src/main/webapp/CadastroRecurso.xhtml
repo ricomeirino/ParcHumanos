@@ -115,10 +115,10 @@
 										<h:outputText value="#{rec.ocupacao.nome}" />
 									</f:facet>
 									<f:facet name="input">
-										<h:selectOneMenu value="#{rec.ocupacao}"
+										<h:selectOneMenu value="#{rec.ocupacao.idOcupacao}"
 											style="width:100%">
 											<f:selectItems value="#{cadastroRecursoBean.ocupacoes}"
-												var="ocp" itemLabel="#{ocp.nome}" itemValue="#{ocp}" />
+												var="ocp" itemLabel="#{ocp.nome}" itemValue="#{ocp.idOcupacao}" />
 										</h:selectOneMenu>
 									</f:facet>
 								</p:cellEditor>

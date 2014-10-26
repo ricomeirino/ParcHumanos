@@ -97,11 +97,30 @@ public class RecursoDAO {
 	 *         ocorreu falha na atualização do recurso
 	 */
 
-	public boolean atualizaRecurso(Recurso recurso) {
-		boolean retorno = false;
+	public boolean atualizaRecurso(Recurso recurso, int idOcupacao) {
 		this.con = new ConnectionFactory().getConnection();
+		boolean retorno = true;
+		String sql = "UPDATE recurso SET matricula = ?, nome = ?, ocupacaoId = ? "
+				+ " WHERE idRecurso = ?";
 
-		return retorno;
+
+		PreparedStatement stmt;
+		try {
+			stmt = con.prepareStatement(sql);
+
+			stmt.setString(1, recurso.getMatricula());
+			stmt.setString(2, recurso.getNome());
+			stmt.setInt(3, idOcupacao);
+			stmt.setInt(4, recurso.getIdRecurso());
+
+			stmt.execute();
+			stmt.close();
+			con.close();
+			return retorno;
+		} catch (SQLException e) {
+			 retorno = false;
+			 return retorno;
+		}
 	}
 
 	/**

@@ -138,9 +138,8 @@ public class CadastroAtividadeBean implements Serializable {
 
 	public String insereAtividade() {
 
-		//TODO Validar datas
-		
-		
+		// TODO Validar datas
+
 		CadastroAtividadesControl cadastroAtividadesControl = new CadastroAtividadesControl();
 
 		Atividade atividadeNova = new Atividade();
@@ -151,28 +150,30 @@ public class CadastroAtividadeBean implements Serializable {
 
 		Mensagem mensagem = cadastroAtividadesControl.insereAtividade(
 				atividadeNova, projetoSelecionado.getIdProjeto());
-		 this.atividades = cadastroAtividadesControl.atividadesDoProjeto(projetoSelecionado);
-		
-		 if (mensagem.getCodigo() == 0) {
-			 this.codigoNovo = "";
-			 this.nomeNovo = "";
-			 this.inicioNovo = null;
-			 this.fimNovo = null;
-		 }
-		
-		 FacesMessage msg = new FacesMessage(mensagem.getMsg(),
-		 atividadeNova.getNome());
-		
-		 FacesContext.getCurrentInstance().addMessage(null, msg);
+		this.atividades = cadastroAtividadesControl
+				.atividadesDoProjeto(projetoSelecionado);
+
+		if (mensagem.getCodigo() == 0) {
+			this.codigoNovo = "";
+			this.nomeNovo = "";
+			this.inicioNovo = null;
+			this.fimNovo = null;
+		}
+
+		FacesMessage msg = new FacesMessage(mensagem.getMsg(),
+				atividadeNova.getNome());
+
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 
 		return null;
 	}
-	
+
 	public void onDelete(Atividade atividadeRemovida) {
 
 		CadastroAtividadesControl cadastroAtividadesControl = new CadastroAtividadesControl();
-		
-		Mensagem mensagem = cadastroAtividadesControl.removeAtividade(atividadeRemovida);
+
+		Mensagem mensagem = cadastroAtividadesControl
+				.removeAtividade(atividadeRemovida);
 
 		if (mensagem.getCodigo() == 0) {
 			this.atividades.remove(atividadeRemovida);
@@ -187,23 +188,27 @@ public class CadastroAtividadeBean implements Serializable {
 	public void onEdit(RowEditEvent event) {
 		Atividade atividadeEditada = (Atividade) event.getObject();
 		CadastroAtividadesControl cadastroAtividadesControl = new CadastroAtividadesControl();
-		
-				
-		Mensagem mensagem = cadastroAtividadesControl.atualizaAtividade(atividadeEditada); 
-				
-		this.atividades = cadastroAtividadesControl.atividadesDoProjeto(projetoSelecionado);
-		
+
+		Mensagem mensagem = cadastroAtividadesControl
+				.atualizaAtividade(atividadeEditada);
+
+		this.atividades = cadastroAtividadesControl
+				.atividadesDoProjeto(projetoSelecionado);
+
 		FacesMessage msg = new FacesMessage(mensagem.getMsg(),
 				((Atividade) event.getObject()).getCodigo());
 
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 
 	}
-	
+
 	public void onCancel(RowEditEvent event) {
 		FacesMessage msg = new FacesMessage("Edição de Atividade Cancelada",
 				((Atividade) event.getObject()).getCodigo());
 
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-	}	
+	}
+
+
+
 }

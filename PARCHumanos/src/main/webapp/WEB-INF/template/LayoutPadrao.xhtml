@@ -10,6 +10,34 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title><ui:insert name="titulo">ParcHumanos - Programa de Alocação de Recursos Clássico - Humanos</ui:insert></title>
 	<h:outputStylesheet library="css" name="sistema.css" />
+	<script>
+		PrimeFaces.locales['pt'] = {
+		    closeText: 'Fechar',
+		    prevText: 'Anterior',
+		    nextText: 'Próximo',
+		    currentText: 'Começo',
+		    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+		    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],
+		    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+		    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+		    dayNamesMin: ['D','S','T','Q','Q','S','S'],
+		    weekHeader: 'Semana',
+		    firstDay: 0,
+		    isRTL: false,
+		    showMonthAfterYear: false,
+		    yearSuffix: '',
+		    timeOnlyTitle: 'Só Horas',
+		    timeText: 'Tempo',
+		    hourText: 'Hora',
+		    minuteText: 'Minuto',
+		    secondText: 'Segundo',
+		    ampm: false,
+		    month: 'Mês',
+		    week: 'Semana',
+		    day: 'Dia',
+		    allDayText : 'Todo o Dia'
+		};
+	</script>
 </h:head>
 
 <h:body>
@@ -27,7 +55,7 @@
 						<p:menuitem value="Cadastro de Recursos" style="width:150px" outcome="CadastroRecurso.xhtml" />
 						<p:menuitem value="Cadastro de Projetos" style="width:150px" outcome="CadastroProjeto.xhtml" />
 						<p:menuitem value="Cadastro de Atividades"
-							style="text-align:center;width:160px" />
+							style="text-align:center;width:160px" outcome="CadastroAtividade.xhtml" />
 						<p:menuitem value="Relatório" style="width:100px" />
 
 					</p:menubar></td>

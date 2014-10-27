@@ -72,7 +72,7 @@ public class CadastroRecursoControl {
 			if (inseriu) {
 				codigoMsg = 0;
 				msg = "Recurso inserido com sucesso";
-				recursoNovo = recursoDAO.buscaRecursoPorMatricula(recursoNovo.getMatricula()); 
+				//recursoNovo = recursoDAO.buscaRecursoPorMatricula(recursoNovo.getMatricula()); 
 						
 			} else {
 				codigoMsg = 2;

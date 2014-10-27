@@ -1,6 +1,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 /**Classe que faz o mapeamento da tabela projeto da base de dados
  * @author Ricardo
@@ -17,7 +18,11 @@ public class Atividade implements Serializable {
 	private Date fim;
 	private boolean finalizada;
 	private Projeto projeto;
-
+	
+	private String inicioFormatada;
+	private String fimFormatada;
+	private String finalizadaFormatada;
+	
 	public int getIdAtividade() {
 		return idAtividade;
 	}
@@ -48,6 +53,8 @@ public class Atividade implements Serializable {
 
 	public void setInicio(Date inicio) {
 		this.inicio = inicio;
+		SimpleDateFormat dt1 = new SimpleDateFormat("dd/MM/yyyy");
+		this.inicioFormatada = dt1.format(inicio);
 	}
 
 	public Date getFim() {
@@ -56,6 +63,8 @@ public class Atividade implements Serializable {
 
 	public void setFim(Date fim) {
 		this.fim = fim;
+		SimpleDateFormat dt1 = new SimpleDateFormat("dd/MM/yyyy");
+		this.fimFormatada = dt1.format(fim);
 	}
 
 	public boolean isFinalizada() {
@@ -64,6 +73,11 @@ public class Atividade implements Serializable {
 
 	public void setFinalizada(boolean finalizada) {
 		this.finalizada = finalizada;
+		if (this.finalizada){
+			this.finalizadaFormatada = "Sim";
+		}else{
+			this.finalizadaFormatada = "Não";
+		}
 	}
 
 	public Projeto getProjeto() {
@@ -73,5 +87,36 @@ public class Atividade implements Serializable {
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
 	}
+
+	public String getInicioFormatada() {
+		return inicioFormatada;
+	}
+
+	public void setInicioFormatada(String inicioFormatada) {
+		this.inicioFormatada = inicioFormatada;
+	}
+
+	public String getFimFormatada() {
+		return fimFormatada;
+	}
+
+	public void setFimFormatada(String fimFormatada) {
+		this.fimFormatada = fimFormatada;
+	}
+
+	public String getFinalizadaFormatada() {
+		return finalizadaFormatada;
+	}
+
+	public void setFinalizadaFormatada(String finalizadaFormatada) {
+		this.finalizadaFormatada = finalizadaFormatada;
+		if (this.finalizadaFormatada.equals("Sim")){
+			this.finalizada = true;
+		}else{
+			this.finalizada = false;
+		}
+	}
+	
+	
 
 }

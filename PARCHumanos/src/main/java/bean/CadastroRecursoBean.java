@@ -88,15 +88,6 @@ public class CadastroRecursoBean implements Serializable {
 	public void onEdit(RowEditEvent event) {
 		Recurso recursoEditado = (Recurso) event.getObject();
 
-		System.out.println("recursoE" + recursoEditado.getIdRecurso());
-		System.out.println("recursoE" + recursoEditado.getMatricula());
-		System.out.println("recursoE" + recursoEditado.getNome());
-		System.out.println("recursoE"
-				+ recursoEditado.getOcupacao().getIdOcupacao());
-		System.out.println("recursoE" + recursoEditado.getOcupacao().getNome());
-		System.out.println("recursoE   "
-				+ recursoEditado.getOcupacao().getIdOcupacao());
-
 		CadastroRecursoControl cadastroRecursoControl = new CadastroRecursoControl();
 		
 		Mensagem mensagem = cadastroRecursoControl.atualizarRecurso(

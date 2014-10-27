@@ -30,8 +30,8 @@ public class CadastroProjetoControl {
 			if (inseriu) {
 				codigoMsg = 0;
 				msg = "Projeto inserido com sucesso";
-				projetoNovo = projetoDAO.buscaProjetoPorCodigo(projetoNovo
-						.getCodigo());
+//				projetoNovo = projetoDAO.buscaProjetoPorCodigo(projetoNovo
+//						.getCodigo());
 			} else {
 				codigoMsg = 2;
 				msg = "Falha na inclusão do projeto. Tente novamente.";
@@ -90,5 +90,10 @@ public class CadastroProjetoControl {
 		Mensagem mensagem = new Mensagem(codigoMsg, msg);
 
 		return mensagem;
+	}
+	
+	public Projeto buscaProjetoPorCodigo(String codigo){
+		ProjetoDAO projetoDAO = new ProjetoDAO();
+		return projetoDAO.buscaProjetoPorCodigo(codigo);
 	}
 }

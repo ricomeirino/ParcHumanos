@@ -302,5 +302,61 @@ public class AtividadeDAO {
 			 return retorno;
 		}
 	}	
+
+	/**
+	 * Método para listar as atividades de um projeto que ainda não estão alocadas existentes na base de dados
+	 * 
+	 * @param projeto
+	 * @return List<Atividade> - lista com as atividades do Projeto sem alocação que existem na base de dados
+	 */
+	public List<Atividade> atividadesDoProjetoSemAlocacao(Projeto projetoSelecionado){
+		this.con = new ConnectionFactory().getConnection();
+		List<Atividade> atividades = new ArrayList<Atividade>();
+		String sql = "select a.idatividade, a.codigo, a.nome, a.inicio, a.fim, a.finalizada, "
+				+ " a.projetoId, p.codigo as codProj, p.nome as nomeProj"
+				+ " from atividade a "
+				+ " inner join projeto p on (a.projetoId = p.idProjeto) "
+				+ " where p.idProjeto = ? and a.idatividade not in (select atividadeId from alocacao)"
+				+ " order by a.nome ";
+
+		try {
+
+			PreparedStatement stmt = con.prepareStatement(sql);
+			stmt.setInt(1, projetoSelecionado.getIdProjeto());
+			
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				
+				Atividade atividade = new Atividade();
+				atividade.setIdAtividade(rs.getInt("idatividade"));
+				atividade.setCodigo(rs.getString("codigo"));
+				atividade.setNome(rs.getString("nome"));
+				atividade.setInicio(rs.getDate("inicio"));
+				atividade.setFim(rs.getDate("fim"));
+				atividade.setFinalizada(rs.getBoolean("finalizada"));
+				
+				
+				Projeto projeto = new Projeto();
+				projeto.setIdProjeto(rs.getInt("projetoId"));
+				projeto.setNome(rs.getString("nomeProj"));
+				projeto.setCodigo(rs.getString("codProj"));
+				
+				atividade.setProjeto(projeto);
+				
+				atividades.add(atividade);
+				
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return atividades;
+	}	
 	
 }

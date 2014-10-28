@@ -176,10 +176,43 @@ public class RecursoDAO {
 	 */
 
 	public List<Recurso> listaRecursosDesalocados() {
-		List<Recurso> recursosDesalocados = new ArrayList<Recurso>();
+		List<Recurso> recursos = new ArrayList<Recurso>();
 		this.con = new ConnectionFactory().getConnection();
 
-		return recursosDesalocados;
+		String sql = "SELECT r.idRecurso, r.nome, r.matricula, o.idocupacao, o.nome as nomeOcup "
+				+ " FROM recurso r "
+				+ " INNER JOIN ocupacao o on (r.ocupacaoId=o.idocupacao) "
+				+ " where r.idrecurso not in (select recursoId from alocacao)"
+				+ " order by r.nome ";
+
+		try {
+
+			PreparedStatement stmt = con.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				Recurso recurso = new Recurso();
+				Ocupacao ocupacao = new Ocupacao();
+
+				recurso.setIdRecurso(rs.getInt("idRecurso"));
+				recurso.setNome(rs.getString("nome"));
+				recurso.setMatricula(rs.getString("matricula"));
+				ocupacao.setIdOcupacao(rs.getInt("idocupacao"));
+				ocupacao.setNome(rs.getString("nomeOcup"));
+				recurso.setOcupacao(ocupacao);
+
+				recursos.add(recurso);
+			}
+			rs.close();
+			stmt.close();
+			con.close();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		}
+
+		return recursos;
 	}
 
 	
